@@ -4,8 +4,12 @@ const initialState = {
   error: null,
   getting: false,
   posting: false,
+  deleting: false,
+  patching: false,
   getEmployeesSuccess: false,
   postEmployeesSuccess: false,
+  deleteEmployeesSuccess: false,
+  patchEmployeesSuccess: false,
 };
 
 export default function(state = {...initialState}, action) {
@@ -41,6 +45,28 @@ export default function(state = {...initialState}, action) {
 
     case types.POST_EMPLOYEES_FAILURE:
       return { ...state, postEmployeesSuccess: false, posting: false };
+
+    /////////////////////////////////////////////
+
+    case types.DELETE_EMPLOYEES:
+      return { ...state, deleteEmployeesSuccess: false, deleting: true };
+
+    case types.DELETE_EMPLOYEES_SUCCESS:
+      return { ...state, deleteEmployeesSuccess: true, deleting: false };
+
+    case types.DELETE_EMPLOYEES_FAILURE:
+      return { ...state, deleteEmployeesSuccess: false, deleting: false };
+
+    /////////////////////////////////////////////
+ 
+    case types.PATCH_EMPLOYEES:
+      return { ...state, patchEmployeesSuccess: false, patching: true };
+
+    case types.PATCH_EMPLOYEES_SUCCESS:
+      return { ...state, patchEmployeesSuccess: true, patching: false };
+
+    case types.PATCH_EMPLOYEES_FAILURE:
+      return { ...state, patchEmployeesSuccess: false, patching: false };
 
     /////////////////////////////////////////////
 

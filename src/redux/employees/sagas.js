@@ -1,5 +1,5 @@
 import employeesActions from './actions';
-import {call, put, all} from 'redux-saga/effects';
+import { call, put, all } from 'redux-saga/effects';
 
 export function* getEmployees(api) {
   try {
@@ -18,5 +18,32 @@ export function* postEmployees(api, data) {
   } catch (e) {
     console.log('post employees error: ', e);
     yield all([put(employeesActions.postEmployeesFailure(e))]);
+  }
+}
+
+export function* deleteEmployees(api, data) {
+  try {
+    console.log('delete data', data);
+    const response = yield call(api.deleteEmployees, data);
+    yield all([
+      put(employeesActions.deleteEmployeesSuccess(response)),
+      put(employeesActions.getEmployees()),
+    ]);
+  } catch (e) {
+    console.log('delete employees error: ', e);
+    yield all([put(employeesActions.deleteEmployeesFailure(e))]);
+  }
+}
+
+export function* patchEmployees(api, data) {
+  try {
+    const response = yield call(api.patchEmployees, data);
+      yield all([
+          put(employeesActions.patchEmployeesSuccess(response)),
+          put(employeesActions.getEmployees()),
+      ]);
+  } catch (e) {
+    console.log('patch employees error: ', e);
+    yield all([put(employeesActions.patchEmployeesFailure(e))]);
   }
 }

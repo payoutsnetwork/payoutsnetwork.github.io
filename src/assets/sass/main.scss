@@ -2,9 +2,12 @@
 @import 'abstracts/colors';
 
 @import 'base/typography';
+@import 'base/base';
 
+@import 'components/card';
+@import 'components/justify_block';
 @import 'components/react_table';
-@import 'components/icon';
+@import 'components/svg';
 
 @import 'layout/forms';
 @import 'layout/sidebar';

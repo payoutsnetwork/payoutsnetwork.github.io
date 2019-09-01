@@ -1,0 +1,7 @@
+@import '../abstracts/variables';
+
+.justified-block {
+    display: flex;
+    justify-content: space-between;
+    margin: $medium-margin;
+}

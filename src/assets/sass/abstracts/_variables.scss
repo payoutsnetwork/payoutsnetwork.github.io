@@ -1,5 +1,13 @@
+$small-margin: 5px;
+$medium-margin: 10px;
+$large-margin: 20px;
+
+$medium-padding: 10px;
+$large-padding: 20px;
+
 $table-font-size: 9pt;
 $table-padding: 10px;
+$table-border: 0px solid rgba(0, 0, 0, 0.1);
 
 $table-header-font-size: 9pt;
 $table-header-font-weight: 700;
@@ -11,4 +19,5 @@ $table-body-separator: solid 2px rgba(0, 0, 0, 0.05);
 // // // // // // // // // // // // // // // //
 
 $icon-default-size: 18px;
+$icon-big-size: 23px;
 $icon-default-weight: 900;

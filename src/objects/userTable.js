@@ -1,7 +1,7 @@
 import React from 'react';
 
 import helpers from '../helpers';
-import Icon from '../components/Icon';
+import Icon from '../components/Cells/Icon';
 
 const userTableProps = {
   columns: [
@@ -15,7 +15,6 @@ const userTableProps = {
       },
       accessor: 'name',
       Cell: d => {
-        console.log(d);
         return d.original.first_name + ' ' + d.original.last_name;
       },
     },
@@ -28,6 +27,9 @@ const userTableProps = {
         );
       },
       accessor: 'email',
+      Cell: d => {
+        return <a href={'mailto:' + d.original.email}>{d.original.email}</a>;
+      },
     },
     {
       Header: () => {
@@ -48,8 +50,8 @@ const userTableProps = {
         );
       },
       accessor: 'address',
+      width: 250,
       Cell: d => {
-        console.log(d);
         return `${d.original.street_address} ${d.original.city}, ${d.original.state_abbreviation} ${d.original.zip_code}`;
       },
     },
@@ -69,9 +71,18 @@ const userTableProps = {
     {
       Header: '',
       sortable: false,
+      width: 50,
       accessor: 'button',
-      Cell: () => {
-        return 'x';
+      Cell: (d) => {
+        return (
+          <Icon
+            onClick={(e) => {
+              console.log('clicked user id:', d.original.id);
+            }}
+            className="red pointer">
+            ⓧ
+          </Icon>
+        );
       },
     },
   ],
