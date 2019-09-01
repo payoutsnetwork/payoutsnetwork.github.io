@@ -9,6 +9,7 @@ import Card from '../../components/Cells/Card';
 import Well from '../../components/Cells/Well';
 import JustifyBlock from '../../components/Cells/JustifyBlock';
 import SearchBar from '../../components/Cells/SearchBar';
+import SideBar from '../../components/Molecules/SideBar'
 
 class UserManagement extends Component {
   componentDidMount() {
@@ -32,31 +33,28 @@ class UserManagement extends Component {
   render() {
     return (
       <Container fluid={true}>
-        <Well>
-          <Row>
-            <Col xs={{ span: 10, offset: 2 }}>
-              <JustifyBlock>
-                <h5>Manage Recipients</h5>
-                <Link to="/create">
-                  <Button>Create New Recipient</Button>
-                </Link>
-              </JustifyBlock>
-              <Card>
-                <Col xs={4}>
-                  <SearchBar onSubmit={this._searchSubmit} />
-                </Col>
-                <Col xs={12}>
-                  <UserTable
-                    loading={this.props.employees.getting}
-                    data={this.props.employeeListData}
-                    deleteEmployee={this._deleteEmployee}
-                    patchEmployee={this._patchEmployee}
-                  />
-                </Col>
-              </Card>
-            </Col>
-          </Row>
-        </Well>
+          <SideBar/>
+          <Col xs={12}>
+            <JustifyBlock>
+              <h5>Manage Recipients</h5>
+              <Link to="/create">
+                <Button>Create New Recipient</Button>
+              </Link>
+            </JustifyBlock>
+            <Card>
+              <Col xs={4}>
+                <SearchBar onSubmit={this._searchSubmit} />
+              </Col>
+              <Col xs={12}>
+                <UserTable
+                  loading={this.props.employees.getting}
+                  data={this.props.employeeListData}
+                  deleteEmployee={this._deleteEmployee}
+                  patchEmployee={this._patchEmployee}
+                />
+              </Col>
+            </Card>
+          </Col>
       </Container>
     );
   }
