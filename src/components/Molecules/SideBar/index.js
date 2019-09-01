@@ -1,15 +1,46 @@
 import React from 'react';
 import PNBrand from '../../../assets/img/pn_logo_blue_small.png';
+import openDoor from '../../../assets/img/openDoor.png';
+import exit from '../../../assets/img/exit.png';
+import { Link } from 'react-router-dom';
 
 const SideBar = props => {
   return (
-    <div class="sidebar">
-      <img style={{ width: '50px', margin: '10px' }} src={PNBrand} alt="" />
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#clients">Clients</a>
-      <a href="#contact">Contact</a>
-    </div>
+    <>
+      <table className="sidebar">
+        <tbody>
+          <tr>
+            <td valign="top">
+              <img src={PNBrand} alt="brand" />
+              <hr />
+            </td>
+          </tr>
+          <tr>
+            <td valign="bottom">
+              <table>
+                <tbody>
+                  <tr>
+                    <td>
+                      <Link to="#">
+                        <img className="small" src={exit} alt="logout" />
+                      </Link>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <Link to="#">
+                        <img className="small" src={openDoor} alt="open" />
+                      </Link>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      {props.children}
+    </>
   );
 };
 

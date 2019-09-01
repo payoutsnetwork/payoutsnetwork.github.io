@@ -33,7 +33,6 @@ class UserManagement extends Component {
   render() {
     return (
       <Container fluid={true}>
-          <SideBar/>
           <Col xs={12}>
             <JustifyBlock>
               <h5>Manage Recipients</h5>

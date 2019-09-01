@@ -23,7 +23,6 @@ export function* postEmployees(api, data) {
 
 export function* deleteEmployees(api, data) {
   try {
-    console.log('delete data', data);
     const response = yield call(api.deleteEmployees, data);
     yield all([
       put(employeesActions.deleteEmployeesSuccess(response)),

@@ -14,9 +14,8 @@ class UserCreate extends Component {
   render() {
     return (
       <Container fluid={true}>
-        <Well>
           <Row>
-            <Col xs={{ span: 10, offset: 2 }}>
+            <Col xs={12}>
               <JustifyBlock>
                 <h5>Create Recipients</h5>
                 <Link to="/create">
@@ -33,7 +32,6 @@ class UserCreate extends Component {
               </Card>
             </Col>
           </Row>
-        </Well>
       </Container>
     );
   }
