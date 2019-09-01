@@ -1,0 +1,8 @@
+@import '../abstracts/variables';
+
+.icon {
+  font: {
+    size: $icon-default-size;
+    weight: $icon-default-weight;
+  }
+}
