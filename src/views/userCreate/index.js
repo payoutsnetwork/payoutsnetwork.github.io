@@ -14,58 +14,76 @@ import CreateUserForm from '../../components/Molecules/CreateUserForm';
 class UserCreate extends Component {
   constructor(props) {
     super(props);
-    this.createUserFormRef = React.createRef();
     this.state = {
-      phone: null,
+      formState: {
+        first_name: {},
+        street_address: {},
+        last_name: {},
+        city: {},
+        email: {},
+        state_id: {},
+        phone: {},
+        zip_code: {},
+        status: { value: process.env.DEFAULT_STATUS || 'active', valid: true },
+      },
     };
+    this.baseState = this.state;
   }
 
   componentDidMount() {
     this.props.getStates();
   }
 
-  componendDidUpdate() {
-    //this.refs['create-user-form'].form.reset();
-  }
-
-  _validatePhone = () => {
-    if (!this.state.phone) {
-      return null;
-    } else if (this.state.phone.match('^[0-9]{3}-[0-9]{3}-[0-9]{4}$')) {
-      return true;
-    } else {
-      return false;
-    }
+  _handleChangeForm = e => {
+    var obj = { formState: { ...this.state.formState } };
+    obj.formState[e.target.name] = {
+      value: e.target.value,
+      valid: this._validateInput(e),
+    };
+    this.setState({ ...obj });
   };
 
-  _formatFormData = form => {
-    //set the status to whatever the default is.. also done by db
-    let formattedData = {
-      status: process.env.DEFAULT_STATUS || 'active',
-    };
-    for (var i = 0, len = form.length; i < len; i++) {
-      //filter out the submit button
-      if (form[i].name !== '') {
-        //relies on the form's name field matching the column name in the db
-        formattedData[form[i].name] = form[i].value;
-      }
+  _validateInput = e => {
+    switch (e.target.name) {
+      case 'phone':
+        if (e.target.value.match('^[0-9]{3}-[0-9]{3}-[0-9]{4}$')) {
+          return true;
+        } else {
+          return false;
+        }
+
+      default:
+        if (e.target.value === '') {
+          return false;
+        } else {
+          return true;
+        }
     }
-    //turn the id back into a number
-    formattedData.state_id = parseInt(formattedData.state_id);
-    return formattedData;
   };
 
   _handleSubmit = e => {
-    const form = e.currentTarget;
-    if (this._validatePhone() && form.checkValidity() === true) {
-      this.props.postEmployees(this._formatFormData(form));
+    const formState = this.state.formState;
+    const data = {
+      first_name: formState.first_name.value,
+      street_address: formState.street_address.value,
+      last_name: formState.last_name.value,
+      city: formState.city.value,
+      email: formState.email.value,
+      state_id: parseInt(formState.state_id.value),
+      phone: formState.phone.value,
+      zip_code: formState.zip_code.value,
+      status: formState.status.value,
+    };
+
+    if (this._validateForm() === true) {
       e.preventDefault();
+      this.props.postEmployees(data);
 
       const resetFormOnSuccess = setInterval(() => {
         if (this.props.postingEmployee) {
           return;
         } else if (this.props.employees.postEmployeesSuccess) {
-          this.createUserFormRef.current.reset();
+          this.setState({ ...this.baseState });
           clearInterval(resetFormOnSuccess);
         } else {
           clearInterval(resetFormOnSuccess);
@@ -77,9 +95,19 @@ class UserCreate extends Component {
     }
   };
 
-  render() {
-    const phoneValid = this._validatePhone();
+  _validateForm = () => {
+    const keys = Object.keys(this.state.formState);
+    for (var i = 0, len = keys.length; i < len; i++) {
+      const key = keys[i];
+      const valid = this.state.formState[key].valid;
+      if (valid !== true) {
+        return false;
+      }
+    }
+    return true;
+  };
 
+  render() {
     return (
       <Container fluid={true}>
         <Row>
@@ -94,14 +122,11 @@ class UserCreate extends Component {
               text="Sending request to server">
               <Card>
                 <CreateUserForm
-                  ref={this.createUserFormRef}
                   loading={this.props.statesOptions.length === 0 ? true : false}
-                  handleSubmit={this._handleSubmit}
                   statesOptions={this.props.statesOptions}
-                  phoneValid={phoneValid}
-                  onChangePhone={e => {
-                    this.setState({ phone: e.target.value });
-                  }}
+                  handleChange={this._handleChangeForm}
+                  handleSubmit={this._handleSubmit}
+                  formState={this.state.formState}
                 />
               </Card>
             </LoadingOverlay>

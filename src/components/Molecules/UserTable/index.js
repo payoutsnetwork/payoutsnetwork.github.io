@@ -10,13 +10,10 @@ const UserTable = props => {
   const columns = [
     {
       Header: () => {
-        return (
-          <>
-            <Icon>↕</Icon> Name
-          </>
-        );
+        return <>Name</>;
       },
       accessor: 'name',
+      sortable: false,
       Cell: d => {
         return d.original.first_name + ' ' + d.original.last_name;
       },
@@ -46,13 +43,10 @@ const UserTable = props => {
     },
     {
       Header: () => {
-        return (
-          <>
-            <Icon>↕</Icon> Address
-          </>
-        );
+        return <>Address</>;
       },
       accessor: 'address',
+      sortable: false,
       width: 250,
       Cell: d => {
         return `${d.original.street_address} ${d.original.city}, ${d.original.state_abbreviation} ${d.original.zip_code}`;
@@ -70,7 +64,7 @@ const UserTable = props => {
       Cell: d => {
         switch (d.original.status) {
           case 'active':
-            return <span className="blue">Active</span>;
+            return <span className="blue bold">Active</span>;
           case 'inactive':
             return <span className="grey">Inactive</span>;
           default:
@@ -115,7 +109,10 @@ const UserTable = props => {
 
   return (
     <ReactTable
+      onSortedChange={props.onSortedChange}
       loading={props.loading}
+      pageSize={props.pageSize}
+      minRows={props.pageSize}
       data={props.data}
       manual={true}
       showPagination={false}

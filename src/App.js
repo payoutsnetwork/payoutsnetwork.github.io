@@ -17,7 +17,7 @@ function App() {
               //include sidebar on all pages
               return (
                 <AlertSystem>
-                  <SideBar>{prop.render}</SideBar>
+                  <SideBar links={prop.sidebarLinks || []}>{prop.render}</SideBar>
                 </AlertSystem>
               );
             }}

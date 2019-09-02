@@ -1,9 +1,10 @@
 import employeesActions from './actions';
 import { call, put, all } from 'redux-saga/effects';
 
-export function* getEmployees(api) {
+export function* getEmployees(api, data) {
+    console.log(data);
   try {
-    const response = yield call(api.getEmployees);
+    const response = yield call(api.getEmployees, data);
     yield all([put(employeesActions.getEmployeesSuccess(response))]);
   } catch (e) {
     console.log('get employees error: ', e);
@@ -20,7 +21,10 @@ export function* postEmployees(api, data) {
     ]);
   } catch (e) {
     console.log('post employees error: ', e);
-    yield all([put(employeesActions.postEmployeesFailure(e))]);
+    yield all([
+      put(employeesActions.clearEmployeesSuccess()),
+      put(employeesActions.postEmployeesFailure(e)),
+    ]);
   }
 }
 
@@ -29,7 +33,7 @@ export function* deleteEmployees(api, data) {
     const response = yield call(api.deleteEmployees, data);
     yield all([
       put(employeesActions.deleteEmployeesSuccess(response)),
-      put(employeesActions.getEmployees()),
+      put(employeesActions.getEmployees(data.data)),
     ]);
   } catch (e) {
     console.log('delete employees error: ', e);
@@ -42,7 +46,7 @@ export function* patchEmployees(api, data) {
     const response = yield call(api.patchEmployees, data);
     yield all([
       put(employeesActions.patchEmployeesSuccess(response)),
-      put(employeesActions.getEmployees()),
+      put(employeesActions.getEmployees(data.data)),
     ]);
   } catch (e) {
     console.log('patch employees error: ', e);

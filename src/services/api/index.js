@@ -12,7 +12,7 @@ export const API = {
     });
   },
   getEmployees: data => {
-    return axios.get(apiBase + 'employees/', {
+    return axios.get(apiBase + `employees/?page=${data.data.page}&perPage=${data.data.perPage}`, {
       headers: headers,
     });
   },
@@ -27,7 +27,6 @@ export const API = {
     });
   },
   postEmployees: data => {
-      console.log(data);
     return axios.post(apiBase + 'employees/', data.data, {
       headers: headers,
     });

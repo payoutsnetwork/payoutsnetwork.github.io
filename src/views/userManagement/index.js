@@ -6,12 +6,26 @@ import { Link } from 'react-router-dom';
 import employeeActions from '../../redux/employees/actions';
 import UserTable from '../../components/Molecules/UserTable';
 import Card from '../../components/Cells/Card';
+import LoadMore from '../../components/Cells/LoadMore';
 import JustifyBlock from '../../components/Cells/JustifyBlock';
+import HorizontalCenterBlock from '../../components/Cells/HorizontalCenterBlock/';
 import SearchBar from '../../components/Molecules/SearchBar';
 
 class UserManagement extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      getEmployeesData: {
+        page: 1,
+        perPage: process.env.DEFAULT_PER_PAGE || 15,
+        sort: null,
+      },
+    };
+    this.baseState = this.state;
+  }
+
   componentDidMount() {
-    this.props.getEmployees();
+    this.props.getEmployees({ ...this.state.getEmployeesData });
   }
 
   _searchSubmit = e => {
@@ -21,37 +35,83 @@ class UserManagement extends Component {
   };
 
   _deleteEmployee = d => {
-    this.props.deleteEmployees({ employeeId: d.original.id });
+    this.props.deleteEmployees({
+      employeeId: d.original.id,
+      ...this.state.getEmployeesData,
+    });
   };
 
   _patchEmployee = d => {
-    this.props.patchEmployees({ employeeId: d.original.id });
+    this.props.patchEmployees({
+      employeeId: d.original.id,
+      ...this.state.getEmployeesData,
+    });
+  };
+
+  _loadMoreEmployees = () => {
+    var obj = { getEmployeesData: { ...this.state.getEmployeesData } };
+    obj.getEmployeesData.perPage += process.env.DEFAULT_PER_PAGE || 15;
+    this.setState({ ...obj }, () => {
+      this.props.getEmployees({
+        ...this.state.getEmployeesData,
+      });
+    });
+  };
+
+  _sortEmployees = newSort => {
+    var obj = { getEmployeesData: { ...this.state.getEmployeesData } };
+    obj.getEmployeesData.sort = newSort;
+    this.setState({ ...obj }, () => {
+      this.props.getEmployees({
+        ...this.state.getEmployeesData,
+      });
+    });
   };
 
   render() {
+    const last_page = this.props.employeeListLastPage;
+    const cur_page = this.state.getEmployeesData.page;
+
+    const more_exist = last_page === cur_page ? false : true;
+
     return (
       <Container fluid={true}>
-          <Col xs={12}>
-            <JustifyBlock>
-              <h5>Manage Recipients</h5>
-              <Link to="/create">
-                <Button>Create New Recipient</Button>
-              </Link>
-            </JustifyBlock>
-            <Card>
-              <Col xs={4}>
-                <SearchBar onSubmit={this._searchSubmit} />
-              </Col>
-              <Col xs={12}>
-                <UserTable
-                  loading={this.props.employees.getting}
-                  data={this.props.employeeListData}
-                  deleteEmployee={this._deleteEmployee}
-                  patchEmployee={this._patchEmployee}
+        <Col xs={12}>
+          <JustifyBlock>
+            <h5>Manage Recipients</h5>
+            <Link to="/create">
+              <Button>Create New Recipient</Button>
+            </Link>
+          </JustifyBlock>
+          <Card>
+            <Col xs={4}>
+              <SearchBar onSubmit={this._searchSubmit} />
+            </Col>
+            <Col xs={12}>
+              <UserTable
+                onSortedChange={(newSorted, column, shiftKey) => {
+                  this._sortEmployees(newSorted[0]);
+                }}
+                pageSize={
+                  this.props.employees.getEmployeesSuccess
+                    ? this.props.employees.employeeList.data.per_page
+                    : null
+                }
+                loading={this.props.employees.getting}
+                data={this.props.employeeListData}
+                deleteEmployee={this._deleteEmployee}
+                patchEmployee={this._patchEmployee}
+              />
+              <hr />
+              <HorizontalCenterBlock>
+                <LoadMore
+                  moreExist={more_exist}
+                  onClick={this._loadMoreEmployees}
                 />
-              </Col>
-            </Card>
-          </Col>
+              </HorizontalCenterBlock>
+            </Col>
+          </Card>
+        </Col>
       </Container>
     );
   }
@@ -61,9 +121,14 @@ function mapStateToProps(state) {
   const employeeListData = state.employees.getEmployeesSuccess
     ? state.employees.employeeList.data.data
     : [];
+
+  const employeeListLastPage = state.employees.getEmployeesSuccess
+    ? state.employees.employeeList.data.last_page
+    : null;
   return {
     employees: state.employees,
     employeeListData: employeeListData,
+    employeeListLastPage: employeeListLastPage,
   };
 }
 

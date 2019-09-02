@@ -13,20 +13,25 @@ class AlertSystem extends React.Component {
     let alert;
 
     if (this.props.employees.error) {
+      let message;
+
       try {
-        alert = (
-          <Alert
-            variant="danger"
-            dismissible
-            onClose={() => {
-              this.props.clearEmployeesError();
-            }}>
-            {JSON.stringify(this.props.employees.error.response.data)}
-          </Alert>
-        );
+        message = JSON.stringify(this.props.employees.error.response.data);
       } catch (e) {
         console.log('error creating alert: ', e);
+        message = this.props.employees.error.message;
       }
+
+      alert = (
+        <Alert
+          variant="danger"
+          dismissible
+          onClose={() => {
+            this.props.clearEmployeesError();
+          }}>
+          {message}
+        </Alert>
+      );
     }
 
     if (this.props.employees.postEmployeesSuccess) {

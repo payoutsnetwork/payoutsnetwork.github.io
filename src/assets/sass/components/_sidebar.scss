@@ -28,7 +28,7 @@
   }
 
   a {
-    &:hover {
+    &.disabled:hover {
       cursor: not-allowed;
     }
   }

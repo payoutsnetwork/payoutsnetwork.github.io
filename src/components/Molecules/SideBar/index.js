@@ -1,7 +1,5 @@
 import React from 'react';
 import PNBrand from '../../../assets/img/pn_logo_blue_small.png';
-import openDoor from '../../../assets/img/openDoor.png';
-import exit from '../../../assets/img/exit.png';
 import { Link } from 'react-router-dom';
 
 const SideBar = props => {
@@ -19,20 +17,21 @@ const SideBar = props => {
             <td valign="bottom">
               <table>
                 <tbody>
-                  <tr>
-                    <td>
-                      <Link to="#">
-                        <img className="small" src={exit} alt="logout" />
-                      </Link>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <Link to="#">
-                        <img className="small" src={openDoor} alt="open" />
-                      </Link>
-                    </td>
-                  </tr>
+                  {props.links.map(item => {
+                    return (
+                      <tr key={item.alt + item.to + item.image}>
+                        <td>
+                          <Link className="disabled" to={item.to}>
+                            <img
+                              className="small"
+                              src={item.image}
+                              alt={item.alt}
+                            />
+                          </Link>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </td>
