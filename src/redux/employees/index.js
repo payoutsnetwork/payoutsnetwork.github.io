@@ -91,10 +91,7 @@ export default function(state = { ...initialState }, action) {
     case types.CLEAR_EMPLOYEES_SUCCESS:
       return {
         ...state,
-        patchEmployeesSuccess: false,
         postEmployeesSuccess: false,
-        getEmployeesSuccess: false,
-        deleteEmployeesSuccess: false,
       };
 
     /////////////////////////////////////////////
