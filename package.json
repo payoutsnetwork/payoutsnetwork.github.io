@@ -20,6 +20,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "aws s3 sync --cache-control max-age=0 build/ s3://pn-interview-test-frontend",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
