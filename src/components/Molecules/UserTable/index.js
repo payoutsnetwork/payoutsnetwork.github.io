@@ -92,7 +92,7 @@ const UserTable = props => {
                 onClick={() => {
                   props.deleteEmployee(d);
                 }}>
-                <CircleCross className="icon red medium" />
+                <CircleCross className="icon red small" />
               </div>
             );
           case 'inactive':
@@ -102,11 +102,9 @@ const UserTable = props => {
                 onClick={() => {
                   props.patchEmployee(d);
                 }}>
-                <CirclePlus className="icon blue medium" />
+                <CirclePlus className="icon blue small" />
               </div>
             );
-
-            break;
 
           default:
             return '';

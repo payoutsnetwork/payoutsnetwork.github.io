@@ -3,3 +3,8 @@ input {
     cursor: not-allowed;
   }
 }
+
+[class*="form-"]{
+      margin-bottom: 8px;
+      margin-left: 8px;
+  }

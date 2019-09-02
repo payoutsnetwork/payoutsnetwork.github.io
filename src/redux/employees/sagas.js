@@ -14,7 +14,10 @@ export function* getEmployees(api) {
 export function* postEmployees(api, data) {
   try {
     const response = yield call(api.postEmployees, data);
-    yield all([put(employeesActions.postEmployeesSuccess(response))]);
+    yield all([
+      put(employeesActions.postEmployeesSuccess(response)),
+      put(employeesActions.clearEmployeesError()),
+    ]);
   } catch (e) {
     console.log('post employees error: ', e);
     yield all([put(employeesActions.postEmployeesFailure(e))]);
@@ -37,12 +40,28 @@ export function* deleteEmployees(api, data) {
 export function* patchEmployees(api, data) {
   try {
     const response = yield call(api.patchEmployees, data);
-      yield all([
-          put(employeesActions.patchEmployeesSuccess(response)),
-          put(employeesActions.getEmployees()),
-      ]);
+    yield all([
+      put(employeesActions.patchEmployeesSuccess(response)),
+      put(employeesActions.getEmployees()),
+    ]);
   } catch (e) {
     console.log('patch employees error: ', e);
     yield all([put(employeesActions.patchEmployeesFailure(e))]);
+  }
+}
+
+export function* clearEmployeesError(api, data) {
+  try {
+    yield all([put(employeesActions.clearEmployeesError())]);
+  } catch (e) {
+    console.log('can not clear error: ', e);
+  }
+}
+
+export function* clearEmployeesSuccess(api, data) {
+  try {
+    yield all([put(employeesActions.clearEmployeesSuccess())]);
+  } catch (e) {
+    console.log('can not clear success: ', e);
   }
 }

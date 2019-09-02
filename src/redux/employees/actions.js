@@ -14,6 +14,9 @@ const PATCH_EMPLOYEES = 'patch_employees';
 const PATCH_EMPLOYEES_SUCCESS = 'patch_employees_success';
 const PATCH_EMPLOYEES_FAILURE = 'patch_employees_failure';
 
+const CLEAR_EMPLOYEES_ERROR = 'clear_employees_error';
+const CLEAR_EMPLOYEES_SUCCESS = 'clear_employees_success';
+
 export const types = {
   GET_EMPLOYEES,
   GET_EMPLOYEES_SUCCESS,
@@ -31,6 +34,8 @@ export const types = {
   PATCH_EMPLOYEES_SUCCESS,
   PATCH_EMPLOYEES_FAILURE,
 
+  CLEAR_EMPLOYEES_ERROR,
+  CLEAR_EMPLOYEES_SUCCESS,
 };
 
 export default {
@@ -43,11 +48,25 @@ export default {
   postEmployeesFailure: payload => ({ type: POST_EMPLOYEES_FAILURE, payload }),
 
   deleteEmployees: data => ({ type: DELETE_EMPLOYEES, data }),
-  deleteEmployeesSuccess: payload => ({ type: DELETE_EMPLOYEES_SUCCESS, payload }),
-  deleteEmployeesFailure: payload => ({ type: DELETE_EMPLOYEES_FAILURE, payload }),
+  deleteEmployeesSuccess: payload => ({
+    type: DELETE_EMPLOYEES_SUCCESS,
+    payload,
+  }),
+  deleteEmployeesFailure: payload => ({
+    type: DELETE_EMPLOYEES_FAILURE,
+    payload,
+  }),
 
   patchEmployees: data => ({ type: PATCH_EMPLOYEES, data }),
-  patchEmployeesSuccess: payload => ({ type: PATCH_EMPLOYEES_SUCCESS, payload }),
-  patchEmployeesFailure: payload => ({ type: PATCH_EMPLOYEES_FAILURE, payload }),
+  patchEmployeesSuccess: payload => ({
+    type: PATCH_EMPLOYEES_SUCCESS,
+    payload,
+  }),
+  patchEmployeesFailure: payload => ({
+    type: PATCH_EMPLOYEES_FAILURE,
+    payload,
+  }),
 
+  clearEmployeesError: payload => ({ type: CLEAR_EMPLOYEES_ERROR, payload }),
+  clearEmployeesSuccess: payload => ({ type: CLEAR_EMPLOYEES_SUCCESS, payload }),
 };

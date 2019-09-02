@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import indexRoutes from './routes';
 
 import SideBar from './components/Molecules/SideBar';
+import AlertSystem from './components/Organisms/AlertSystem';
 
 function App() {
   return (
@@ -14,7 +15,11 @@ function App() {
             path={prop.path}
             render={() => {
               //include sidebar on all pages
-              return <SideBar>{prop.render}</SideBar>;
+              return (
+                <AlertSystem>
+                  <SideBar>{prop.render}</SideBar>
+                </AlertSystem>
+              );
             }}
             key={'route_' + prop.name + key}
           />

@@ -6,6 +6,11 @@ const apiBase = process.env.REACT_APP_API_URL;
 const headers = {};
 
 export const API = {
+  getStates: data => {
+    return axios.get(apiBase + 'states/', {
+      headers: headers,
+    });
+  },
   getEmployees: data => {
     return axios.get(apiBase + 'employees/', {
       headers: headers,
@@ -22,7 +27,8 @@ export const API = {
     });
   },
   postEmployees: data => {
-    return axios.post(apiBase + 'employees/', data, {
+      console.log(data);
+    return axios.post(apiBase + 'employees/', data.data, {
       headers: headers,
     });
   },

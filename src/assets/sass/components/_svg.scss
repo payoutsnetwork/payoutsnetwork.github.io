@@ -2,19 +2,33 @@
 @import '../abstracts/colors';
 
 .icon {
+  font: {
+    size: 20px;
+    weight: 800;
+  }
+
   &.red {
     fill: $light-red;
+    color: $light-red;
   }
 
   &.blue {
     fill: $pn-blue;
+    color: $pn-blue;
+  }
+
+  &.small {
+    height: 15px;
+    font-size: 15px;
   }
 
   &.medium {
-      height: 15px;
+    height: 20px;
+    font-size: 20px;
   }
 
   &.big {
-      height: 25px;
+    height: 25px;
+    font-size: 25px;
   }
 }

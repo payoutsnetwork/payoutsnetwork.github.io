@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import employeeActions from '../../redux/employees/actions';
 import UserTable from '../../components/Molecules/UserTable';
 import Card from '../../components/Cells/Card';
-import Well from '../../components/Cells/Well';
 import JustifyBlock from '../../components/Cells/JustifyBlock';
-import SearchBar from '../../components/Cells/SearchBar';
-import SideBar from '../../components/Molecules/SideBar'
+import SearchBar from '../../components/Molecules/SearchBar';
 
 class UserManagement extends Component {
   componentDidMount() {

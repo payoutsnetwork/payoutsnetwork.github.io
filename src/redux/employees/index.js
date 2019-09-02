@@ -12,7 +12,7 @@ const initialState = {
   patchEmployeesSuccess: false,
 };
 
-export default function(state = {...initialState}, action) {
+export default function(state = { ...initialState }, action) {
   switch (action.type) {
     /////////////////////////////////////////////
 
@@ -44,7 +44,12 @@ export default function(state = {...initialState}, action) {
       return { ...state, postEmployeesSuccess: true, posting: false };
 
     case types.POST_EMPLOYEES_FAILURE:
-      return { ...state, postEmployeesSuccess: false, posting: false };
+      return {
+        ...state,
+        postEmployeesSuccess: false,
+        posting: false,
+        error: action.payload,
+      };
 
     /////////////////////////////////////////////
 
@@ -55,10 +60,15 @@ export default function(state = {...initialState}, action) {
       return { ...state, deleteEmployeesSuccess: true, deleting: false };
 
     case types.DELETE_EMPLOYEES_FAILURE:
-      return { ...state, deleteEmployeesSuccess: false, deleting: false };
+      return {
+        ...state,
+        deleteEmployeesSuccess: false,
+        deleting: false,
+        error: action.payload,
+      };
 
     /////////////////////////////////////////////
- 
+
     case types.PATCH_EMPLOYEES:
       return { ...state, patchEmployeesSuccess: false, patching: true };
 
@@ -66,7 +76,26 @@ export default function(state = {...initialState}, action) {
       return { ...state, patchEmployeesSuccess: true, patching: false };
 
     case types.PATCH_EMPLOYEES_FAILURE:
-      return { ...state, patchEmployeesSuccess: false, patching: false };
+      return {
+        ...state,
+        patchEmployeesSuccess: false,
+        patching: false,
+        error: action.payload,
+      };
+
+    /////////////////////////////////////////////
+
+    case types.CLEAR_EMPLOYEES_ERROR:
+      return { ...state, error: null };
+
+    case types.CLEAR_EMPLOYEES_SUCCESS:
+      return {
+        ...state,
+        patchEmployeesSuccess: false,
+        postEmployeesSuccess: false,
+        getEmployeesSuccess: false,
+        deleteEmployeesSuccess: false,
+      };
 
     /////////////////////////////////////////////
 
