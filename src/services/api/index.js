@@ -12,9 +12,22 @@ export const API = {
     });
   },
   getEmployees: data => {
-    return axios.get(apiBase + `employees/?page=${data.data.page}&perPage=${data.data.perPage}`, {
-      headers: headers,
-    });
+    let sort, sortDirection;
+    if (data.data.sort) {
+      sort = data.data.sort.id;
+      if (data.data.sort.desc) {
+        sortDirection = 'desc';
+      } else {
+        sortDirection = 'asc';
+      }
+    }
+    return axios.get(
+      apiBase +
+        `employees/?page=${data.data.page}&perPage=${data.data.perPage}&sort=${sort}&sortDirection=${sortDirection}`,
+      {
+        headers: headers,
+      }
+    );
   },
   deleteEmployees: data => {
     return axios.delete(apiBase + `employees/${data.data.employeeId}`, data, {
