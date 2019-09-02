@@ -2,7 +2,6 @@ import employeesActions from './actions';
 import { call, put, all } from 'redux-saga/effects';
 
 export function* getEmployees(api, data) {
-    console.log(data);
   try {
     const response = yield call(api.getEmployees, data);
     yield all([put(employeesActions.getEmployeesSuccess(response))]);
