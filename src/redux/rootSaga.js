@@ -16,8 +16,8 @@ export default function* root() {
   yield takeLatest(employeeActionTypes.POST_EMPLOYEES, postEmployees, API);
   yield takeLatest(employeeActionTypes.DELETE_EMPLOYEES, deleteEmployees, API);
   yield takeLatest(employeeActionTypes.PATCH_EMPLOYEES, patchEmployees, API);
-  yield takeLatest(employeeActionTypes.CLEAR_EMPLOYEES_SUCCESS, clearEmployeesSuccess, API);
-  yield takeLatest(employeeActionTypes.CLEAR_EMPLOYEES_ERROR, clearEmployeesError, API);
+  //yield takeLatest(employeeActionTypes.CLEAR_EMPLOYEES_SUCCESS, clearEmployeesSuccess, API);
+  //yield takeLatest(employeeActionTypes.CLEAR_EMPLOYEES_ERROR, clearEmployeesError, API);
 
   yield takeLatest(statesActionTypes.GET_STATES, getStates, API);
 }
