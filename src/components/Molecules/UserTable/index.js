@@ -22,7 +22,7 @@ const UserTable = props => {
       Header: () => {
         return (
           <>
-            <Icon>↕</Icon> Email
+            <Icon id='jestSortEmail'>↕</Icon> Email
           </>
         );
       },
@@ -86,7 +86,7 @@ const UserTable = props => {
                 onClick={() => {
                   props.deleteEmployee(d);
                 }}>
-                <CircleCross className="icon red small" />
+                <CircleCross id="jestDeleteEmployee" className="icon red small" />
               </div>
             );
           case 'inactive':
@@ -96,7 +96,7 @@ const UserTable = props => {
                 onClick={() => {
                   props.patchEmployee(d);
                 }}>
-                <CirclePlus className="icon blue small" />
+                <CirclePlus id="jestPatchEmployee" className="icon blue small" />
               </div>
             );
 

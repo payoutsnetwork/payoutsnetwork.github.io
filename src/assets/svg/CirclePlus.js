@@ -2,6 +2,7 @@ import React from 'react';
 const CirclePlus = props => {
   return (
       <svg
+        id={props.id}
         className={props.className}
         style={{ height: `${props.size}px` }}
         width="24"

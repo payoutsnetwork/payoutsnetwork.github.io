@@ -3,6 +3,7 @@ import React from 'react';
 const CircleCross = props => {
   return (
     <svg
+      id={props.id}
       className={props.className}
       xmlns="http://www.w3.org/2000/svg"
       width="24"
