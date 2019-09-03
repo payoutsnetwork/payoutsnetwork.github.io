@@ -53,18 +53,18 @@ export function* patchEmployees(api, data) {
   }
 }
 
-export function* clearEmployeesError(api, data) {
-  try {
-    yield all([put(employeesActions.clearEmployeesError())]);
-  } catch (e) {
-    console.log('can not clear error: ', e);
-  }
-}
+//export function* clearEmployeesError(api, data) {
+//try {
+//yield all([put(employeesActions.clearEmployeesError())]);
+//} catch (e) {
+//console.log('can not clear error: ', e);
+//}
+//}
 
-export function* clearEmployeesSuccess(api, data) {
-  try {
-    yield all([put(employeesActions.clearEmployeesSuccess())]);
-  } catch (e) {
-    console.log('can not clear success: ', e);
-  }
-}
+//export function* clearEmployeesSuccess(api, data) {
+//try {
+//yield all([put(employeesActions.clearEmployeesSuccess())]);
+//} catch (e) {
+//console.log('can not clear success: ', e);
+//}
+//}

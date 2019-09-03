@@ -1,15 +1,22 @@
-import {takeLatest} from 'redux-saga/effects';
+import { takeLatest } from 'redux-saga/effects';
 
 /* ------ Action Types ------ */
-import {types as employeeActionTypes} from './employees/actions';
-import {types as statesActionTypes} from './states/actions';
+import { types as employeeActionTypes } from './employees/actions';
+import { types as statesActionTypes } from './states/actions';
 
 /* ------ Sagas ------ */
-import {getEmployees, postEmployees, deleteEmployees, patchEmployees, clearEmployeesSuccess, clearEmployeesError} from './employees/sagas'
-import {getStates} from './states/sagas'
+import {
+  //clearEmployeesSuccess,
+  //clearEmployeesError,
+  getEmployees,
+  postEmployees,
+  deleteEmployees,
+  patchEmployees,
+} from './employees/sagas';
+import { getStates } from './states/sagas';
 
 /* ------ API ------ */
-import {API} from '../services/api';
+import { API } from '../services/api';
 
 export default function* root() {
   yield takeLatest(employeeActionTypes.GET_EMPLOYEES, getEmployees, API);
