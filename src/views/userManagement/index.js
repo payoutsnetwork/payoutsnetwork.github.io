@@ -97,7 +97,7 @@ class UserManagement extends Component {
                     ? this.props.employees.employeeList.data.per_page
                     : null
                 }
-                loading={this.props.employees.getting}
+                loading={this.props.employees.getting || this.props.employees.patching || this.props.employees.deleting}
                 data={this.props.employeeListData}
                 deleteEmployee={this._deleteEmployee}
                 patchEmployee={this._patchEmployee}
