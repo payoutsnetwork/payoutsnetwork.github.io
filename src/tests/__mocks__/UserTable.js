@@ -1,6 +1,7 @@
 const UserTableData = {
   sortEmployees: jest.fn((newSorted, column, shiftKey) => {
-    return newSorted[0];
+    const columnName = newSorted[0].id;
+    return {columnName: columnName};
   }),
   patchEmployee: jest.fn(),
   deleteEmployee: jest.fn(),
@@ -16,7 +17,7 @@ const UserTableData = {
       city: 'Bozeman',
       zip_code: '59715',
       status: 'inactive',
-      state_abbreviation: 'MT',
+      state_abbreviation: 'MT'
     },
     {
       id: 13,
@@ -29,9 +30,9 @@ const UserTableData = {
       city: 'Bozeman',
       zip_code: '59715',
       status: 'active',
-      state_abbreviation: 'MT',
-    },
-  ],
+      state_abbreviation: 'MT'
+    }
+  ]
 };
 
 export default UserTableData;

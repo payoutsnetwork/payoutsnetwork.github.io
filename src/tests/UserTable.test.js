@@ -41,8 +41,5 @@ test('onSortedChange is called with "email" when clicking on email header', () =
     />
   );
   wrapper.find('span#jestSortEmail').simulate('click');
-  expect(UserTableData.sortEmployees).toHaveReturnedWith({
-    desc: false,
-    id: 'email',
-  });
+  expect(UserTableData.sortEmployees).toHaveReturnedWith({columnName: 'email'});
 });

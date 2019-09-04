@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the snapshot has not changed 1`] = `null`;
+
+exports[`the snapshot has not changed 2`] = `
+<a
+  href="#"
+  id="jestLoadMoreLink"
+>
+  View More
+</a>
+`;
