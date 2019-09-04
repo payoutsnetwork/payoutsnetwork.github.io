@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Container, Row, Col} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import LoadingOverlay from 'react-loading-overlay';
 
 import statesActions from '../../redux/states/actions';
@@ -24,7 +24,7 @@ class UserCreate extends Component {
         state_id: {},
         phone: {},
         zip_code: {},
-        status: {value: process.env.DEFAULT_STATUS || 'active', valid: true},
+        status: { value: process.env.DEFAULT_STATUS || 'active', valid: true },
       },
     };
     this.baseState = this.state;
@@ -35,12 +35,12 @@ class UserCreate extends Component {
   }
 
   _handleChangeForm = e => {
-    var obj = {formState: {...this.state.formState}};
+    var obj = { formState: { ...this.state.formState } };
     obj.formState[e.target.name] = {
       value: e.target.value,
       valid: this._validateInput(e),
     };
-    this.setState({...obj});
+    this.setState({ ...obj });
   };
 
   _validateInput = e => {
@@ -90,15 +90,17 @@ class UserCreate extends Component {
         if (this.props.postingEmployee) {
           return;
         } else if (this.props.employees.postEmployeesSuccess) {
-          this.setState({...this.baseState});
+          this.setState({ ...this.baseState });
           clearInterval(resetFormOnSuccess);
         } else {
           clearInterval(resetFormOnSuccess);
         }
       }, 100);
+      return 'success';
     } else {
       e.preventDefault();
       e.stopPropagation();
+      return 'fail';
     }
   };
 
@@ -113,7 +115,7 @@ class UserCreate extends Component {
         let formState = this.state.formState;
         formState[key].valid = false;
 
-        this.setState({formState: {...formState}});
+        this.setState({ formState: { ...formState } });
         isValid = false;
       }
     }
@@ -178,5 +180,5 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(UserCreate);

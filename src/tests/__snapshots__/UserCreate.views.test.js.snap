@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the snapshots have not changed 1`] = `
+<Container
+  fluid={true}
+>
+  <ForwardRef
+    noGutters={false}
+  >
+    <Col
+      xs={12}
+    >
+      <JustifyBlock>
+        <h5>
+          Create New Recipient
+        </h5>
+        <Link
+          to="/"
+        >
+          Cancel
+        </Link>
+      </JustifyBlock>
+      <LoadingOverlayWrapper
+        active={false}
+        classNamePrefix="_loading_overlay_"
+        fadeSpeed={500}
+        spinner={true}
+        styles={Object {}}
+        text="Sending request to server"
+      >
+        <Card>
+          <CreateUserForm
+            formState={
+              Object {
+                "city": Object {},
+                "email": Object {},
+                "first_name": Object {},
+                "last_name": Object {},
+                "phone": Object {},
+                "state_id": Object {},
+                "status": Object {
+                  "valid": true,
+                  "value": "active",
+                },
+                "street_address": Object {},
+                "zip_code": Object {},
+              }
+            }
+            handleChange={[Function]}
+            handleSubmit={[Function]}
+            loading={true}
+            statesOptions={Array []}
+          />
+        </Card>
+      </LoadingOverlayWrapper>
+    </Col>
+  </ForwardRef>
+</Container>
+`;
+
+exports[`the snapshots have not changed 2`] = `
+<Container
+  fluid={true}
+>
+  <ForwardRef
+    noGutters={false}
+  >
+    <Col
+      xs={12}
+    >
+      <JustifyBlock>
+        <h5>
+          Create New Recipient
+        </h5>
+        <Link
+          to="/"
+        >
+          Cancel
+        </Link>
+      </JustifyBlock>
+      <LoadingOverlayWrapper
+        active={false}
+        classNamePrefix="_loading_overlay_"
+        fadeSpeed={500}
+        spinner={true}
+        styles={Object {}}
+        text="Sending request to server"
+      >
+        <Card>
+          <CreateUserForm
+            formState={
+              Object {
+                "city": Object {},
+                "email": Object {},
+                "first_name": Object {},
+                "last_name": Object {},
+                "phone": Object {},
+                "state_id": Object {},
+                "status": Object {
+                  "valid": true,
+                  "value": "active",
+                },
+                "street_address": Object {},
+                "zip_code": Object {},
+              }
+            }
+            handleChange={[Function]}
+            handleSubmit={[Function]}
+            loading={false}
+            statesOptions={
+              Array [
+                <option
+                  value={1}
+                >
+                  Montana
+                </option>,
+              ]
+            }
+          />
+        </Card>
+      </LoadingOverlayWrapper>
+    </Col>
+  </ForwardRef>
+</Container>
+`;
