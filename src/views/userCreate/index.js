@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Container, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {Container, Row, Col} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 import LoadingOverlay from 'react-loading-overlay';
 
 import statesActions from '../../redux/states/actions';
@@ -24,7 +24,7 @@ class UserCreate extends Component {
         state_id: {},
         phone: {},
         zip_code: {},
-        status: { value: process.env.DEFAULT_STATUS || 'active', valid: true },
+        status: {value: process.env.DEFAULT_STATUS || 'active', valid: true},
       },
     };
     this.baseState = this.state;
@@ -35,18 +35,25 @@ class UserCreate extends Component {
   }
 
   _handleChangeForm = e => {
-    var obj = { formState: { ...this.state.formState } };
+    var obj = {formState: {...this.state.formState}};
     obj.formState[e.target.name] = {
       value: e.target.value,
       valid: this._validateInput(e),
     };
-    this.setState({ ...obj });
+    this.setState({...obj});
   };
 
   _validateInput = e => {
     switch (e.target.name) {
       case 'phone':
         if (e.target.value.match('^[0-9]{3}-[0-9]{3}-[0-9]{4}$')) {
+          return true;
+        } else {
+          return false;
+        }
+
+      case 'email':
+        if (e.target.value.match('^[^s@]+@[^s@]+.[^s@]+$')) {
           return true;
         } else {
           return false;
@@ -83,7 +90,7 @@ class UserCreate extends Component {
         if (this.props.postingEmployee) {
           return;
         } else if (this.props.employees.postEmployeesSuccess) {
-          this.setState({ ...this.baseState });
+          this.setState({...this.baseState});
           clearInterval(resetFormOnSuccess);
         } else {
           clearInterval(resetFormOnSuccess);
@@ -97,14 +104,21 @@ class UserCreate extends Component {
 
   _validateForm = () => {
     const keys = Object.keys(this.state.formState);
+    let isValid = true;
+
     for (var i = 0, len = keys.length; i < len; i++) {
       const key = keys[i];
       const valid = this.state.formState[key].valid;
       if (valid !== true) {
-        return false;
+        let formState = this.state.formState;
+        formState[key].valid = false;
+
+        this.setState({formState: {...formState}});
+        isValid = false;
       }
     }
-    return true;
+
+    return isValid;
   };
 
   render() {
@@ -164,5 +178,5 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(UserCreate);

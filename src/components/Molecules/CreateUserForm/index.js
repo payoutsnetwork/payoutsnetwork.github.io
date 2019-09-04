@@ -82,6 +82,8 @@ const CreateUserForm = props => {
             <Form.Control
               onChange={props.handleChange}
               value={props.formState.email.value || ''}
+              isValid={props.formState.email.valid === true}
+              isInvalid={props.formState.email.valid === false}
               name="email"
               type="email"
               placeholder="i.e. johndoe@gmail.com"
