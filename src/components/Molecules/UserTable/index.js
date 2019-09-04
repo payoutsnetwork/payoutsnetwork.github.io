@@ -111,8 +111,8 @@ const UserTable = props => {
     <ReactTable
       onSortedChange={props.onSortedChange}
       loading={props.loading}
-      pageSize={props.pageSize}
-      minRows={props.pageSize}
+      pageSize={props.data.length}
+      minRows={props.data.length}
       data={props.data}
       manual={true}
       showPagination={false}
