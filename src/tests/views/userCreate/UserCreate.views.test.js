@@ -1,12 +1,10 @@
 import React from 'react';
-import { create } from 'react-test-renderer';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import toJSON from 'enzyme-to-json';
-import UserCreate from '../views/userCreate';
+import UserCreate from '../../../views/userCreate';
 import { userCreateMocks } from './__mocks__/UserCreate';
-import sinon from 'sinon';
 
-import './setupTests';
+import '../../setupTests';
 
 test('the snapshots have not changed', () => {
   let tree;

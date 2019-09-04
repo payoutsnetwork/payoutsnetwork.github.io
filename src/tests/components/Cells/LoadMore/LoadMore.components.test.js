@@ -1,10 +1,10 @@
 import React from 'react';
-import LoadMore from '../components/Cells/LoadMore';
+import LoadMore from '../../../../components/Cells/LoadMore';
 import loadMoreMock from './__mocks__/LoadMore.js';
 import {create} from 'react-test-renderer';
 import {mount} from 'enzyme';
 
-import './setupTests';
+import '../../../setupTests';
 
 test('the snapshot has not changed', () => {
   let tree = create(<LoadMore />).toJSON();

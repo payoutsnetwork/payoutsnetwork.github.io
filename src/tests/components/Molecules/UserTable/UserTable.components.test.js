@@ -1,9 +1,9 @@
 import React from 'react';
-import UserTable from '../components/Molecules/UserTable';
+import UserTable from '../../../../components/Molecules/UserTable';
 import { create } from 'react-test-renderer';
 import { mount } from 'enzyme';
 
-import './setupTests';
+import '../../../setupTests';
 import UserTableData from './__mocks__/UserTable';
 
 test('the snapshot has not changed', () => {
