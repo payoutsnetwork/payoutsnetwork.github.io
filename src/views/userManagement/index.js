@@ -51,7 +51,6 @@ class UserManagement extends Component {
   _loadMoreEmployees = () => {
     var obj = { getEmployeesData: { ...this.state.getEmployeesData } };
     obj.getEmployeesData.perPage += parseInt(process.env.REACT_APP_DEFAULT_PER_PAGE) || 15;
-      console.log(obj);
     this.setState({ ...obj }, () => {
       this.props.getEmployees({
         ...this.state.getEmployeesData,
