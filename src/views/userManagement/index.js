@@ -17,7 +17,7 @@ class UserManagement extends Component {
     this.state = {
       getEmployeesData: {
         page: 1,
-        perPage: process.env.DEFAULT_PER_PAGE || 15,
+        perPage: parseInt(process.env.REACT_APP_DEFAULT_PER_PAGE) || 15,
         sort: null,
       },
     };
@@ -50,7 +50,8 @@ class UserManagement extends Component {
 
   _loadMoreEmployees = () => {
     var obj = { getEmployeesData: { ...this.state.getEmployeesData } };
-    obj.getEmployeesData.perPage += process.env.DEFAULT_PER_PAGE || 15;
+    obj.getEmployeesData.perPage += parseInt(process.env.REACT_APP_DEFAULT_PER_PAGE) || 15;
+      console.log(obj);
     this.setState({ ...obj }, () => {
       this.props.getEmployees({
         ...this.state.getEmployeesData,
