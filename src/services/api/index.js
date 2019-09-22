@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 const apiBase = process.env.REACT_APP_API_URL;
 
@@ -7,8 +7,8 @@ const headers = {};
 
 export const API = {
   getStates: data => {
-    return axios.get(apiBase + 'states/', {
-      headers: headers,
+    return axios.get(apiBase + "get-states/", {
+      headers: headers
     });
   },
 
@@ -16,38 +16,46 @@ export const API = {
     let sort, sortDirection;
     if (data.data.sort) {
       sort = data.data.sort.id;
-      sortDirection = data.data.sort.desc ? 'desc' : 'asc';
+      sortDirection = data.data.sort.desc ? "desc" : "asc";
 
       return axios.get(
         apiBase +
-          `employees/?page=${data.data.page}&perPage=${data.data.perPage}&sort=${sort}&sortDirection=${sortDirection}`,
+          `get-employees/?page=${data.data.page}&perPage=${data.data.perPage}&sort=${sort}&sortDirection=${sortDirection}`,
         {
-          headers: headers,
+          headers: headers
         }
       );
     } else {
       return axios.get(
         apiBase +
-          `employees/?page=${data.data.page}&perPage=${data.data.perPage}`,
+          `get-employees/?page=${data.data.page}&perPage=${data.data.perPage}`,
         {
-          headers: headers,
+          headers: headers
         }
       );
     }
   },
   deleteEmployees: data => {
-    return axios.delete(apiBase + `employees/${data.data.employeeId}`, data, {
-      headers: headers,
-    });
+    return axios.delete(
+      apiBase + `delete-employees/${data.data.employeeId}`,
+      data,
+      {
+        headers: headers
+      }
+    );
   },
   patchEmployees: data => {
-    return axios.patch(apiBase + `employees/${data.data.employeeId}`, data, {
-      headers: headers,
-    });
+    return axios.patch(
+      apiBase + `patch-employees/${data.data.employeeId}`,
+      data,
+      {
+        headers: headers
+      }
+    );
   },
   postEmployees: data => {
-    return axios.post(apiBase + 'employees/', data.data, {
-      headers: headers,
+    return axios.post(apiBase + "post-employees/", data.data, {
+      headers: headers
     });
-  },
+  }
 };
