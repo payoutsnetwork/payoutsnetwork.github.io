@@ -3,7 +3,9 @@ import axios from "axios";
 const apiBase = process.env.REACT_APP_API_URL;
 
 //TODO: add authorization to app
-const headers = {};
+const headers = {
+  "Content-Type": "application/json"
+};
 
 export const API = {
   getStates: data => {
@@ -36,18 +38,20 @@ export const API = {
     }
   },
   deleteEmployees: data => {
+    const id = data.data.employeeId;
     return axios.delete(
-      apiBase + `delete-employees/${data.data.employeeId}`,
-      data,
+      apiBase + `delete-employees?id=${id}`,
+      {},
       {
         headers: headers
       }
     );
   },
   patchEmployees: data => {
+    const id = data.data.employeeId;
     return axios.patch(
-      apiBase + `patch-employees/${data.data.employeeId}`,
-      data,
+      apiBase + `patch-employees?id=${id}`,
+      {},
       {
         headers: headers
       }
