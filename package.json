@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "env-cmd -f .env.prod react-scripts build",
     "deploy": "node deploy.js prod",
     "test": "react-scripts test",
     "test:coverage": "react-scripts test --coverage",

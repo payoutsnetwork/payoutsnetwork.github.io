@@ -1,7 +1,7 @@
 var shell = require("shelljs");
 var ghpages = require("gh-pages");
 
-shell.exec("env-cmd -f ./.env.remote npm run build");
+shell.exec("env-cmd -f ./.env.prod npm run build");
 process.argv.forEach(function(val, index, array) {
   if (val === "prod") {
     ghpages.publish("build", {
